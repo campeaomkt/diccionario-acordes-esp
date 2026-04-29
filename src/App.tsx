@@ -175,7 +175,7 @@ const Hero = () => {
                     />
                   ))}
                 </div>
-                <span className="text-sm font-medium text-stone-500">+1200 músicos ya lo usan</span>
+                <span className="text-sm font-medium text-stone-500">+500 músicos ya lo usan</span>
               </div>
             </div>
           </motion.div>
@@ -189,7 +189,7 @@ const Hero = () => {
             <div className="relative z-10 bg-white p-4 rounded-[2rem] shadow-2xl border border-stone-100 transform rotate-3 hover:rotate-0 transition-transform duration-500">
               <div className="aspect-square bg-stone-100 rounded-[1.5rem] overflow-hidden relative group">
                 <img 
-                  src="https://eliabcamposteclas.com/wp-content/uploads/2026/04/ChatGPT-Image-27-de-abr.-de-2026-14_38_35.jpg" 
+                  src="https://eliabcamposteclas.com/wp-content/uploads/2026/02/ChatGPT-Image-24-de-fev.-de-2026-15_13_25.jpg" 
                   alt="Diccionario de Acordes - Eliab Campos" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
@@ -328,63 +328,6 @@ const ChordList = () => {
           <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-600/20 blur-[100px] rounded-full"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-400/10 blur-[100px] rounded-full"></div>
         </div>
-      </div>
-    </section>
-  );
-};
-
-const InsideLook = () => {
-  const images = [
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/criativo_real_pagina-01.jpg",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/criativo_real_pagina-02.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/criativo_real_pagina-03.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/criativo_real_pagina-04.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/criativo_real_pagina-05.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/pagina_07.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/pagina_08.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/pagina_09.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/pagina_10.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/pagina_11.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/pagina_12.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/pagina_13.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/pagina_14.png",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/04/pagina_15.png"
-  ];
-
-  // Double the images for seamless infinite scroll
-  const scrollImages = [...images, ...images];
-
-  return (
-    <section className="py-24 bg-stone-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4 uppercase">Mira una pequeña muestra de lo que vas a recibir</h2>
-        <p className="text-stone-600 italic">"La claridad visual que necesitas para dominar cada posición en el teclado."</p>
-      </div>
-      
-      <div className="relative flex">
-        <motion.div 
-          className="flex gap-6 px-4"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ 
-            duration: 80, 
-            ease: "linear", 
-            repeat: Infinity 
-          }}
-        >
-          {scrollImages.map((src, index) => (
-            <div 
-              key={index} 
-              className="flex-shrink-0 w-64 md:w-80 aspect-[3/4] bg-white rounded-2xl shadow-lg border border-stone-100 overflow-hidden group"
-            >
-              <img 
-                src={src} 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                alt={`Página ${index + 1}`}
-                referrerPolicy="no-referrer"
-              />
-            </div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
@@ -574,7 +517,6 @@ export default function App() {
         <ProblemSolution />
         <FeaturesGrid />
         <ChordList />
-        <InsideLook />
         <Author />
         <Pricing />
         <FAQ />
