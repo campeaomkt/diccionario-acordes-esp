@@ -16,6 +16,7 @@ import {
   Keyboard, 
   Layers, 
   Download,
+  Calendar,
   ArrowRight,
   Menu,
   X
@@ -371,6 +372,90 @@ const Author = () => {
   );
 };
 
+const Bonuses = () => {
+  const bonuses = [
+    {
+      title: "GUÍA DE INVERSIONES MAESTRAS",
+      description: "Aprende el secreto de los profesionales para conectar acordes sin mover toda la mano. Logra transiciones fluidas y elegantes en cualquier canción.",
+      value: "$17",
+      icon: <Layers className="w-8 h-8 text-emerald-600" />,
+      tag: "BONUS #1"
+    },
+    {
+      title: "RETO DE MEMORIZACIÓN 30 DÍAS",
+      description: "Un plan paso a paso para que domines los 312 acordes en tiempo récord. Sin frustraciones, solo progreso real con 15 minutos al día.",
+      value: "$12",
+      icon: <Calendar className="w-8 h-8 text-emerald-600" />,
+      tag: "BONUS #2"
+    },
+    {
+      title: "BIBLIOTECA DE PROGRESIONES ÉPICAS",
+      description: "Recibe una selección de las progresiones más usadas en la música actual (Worship, Balada, Pop) para que apliques tus nuevos acordes de inmediato.",
+      value: "$15",
+      icon: <Music className="w-8 h-8 text-emerald-600" />,
+      tag: "BONUS #3"
+    }
+  ];
+
+  return (
+    <section id="bonuses" className="py-24 bg-stone-900 text-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <motion.span 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-bold tracking-wider mb-4"
+          >
+            SÓLO POR TIEMPO LIMITADO
+          </motion.span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">Llévate también estos 3 <span className="text-emerald-500">Regalos Exclusivos</span></h2>
+          <p className="text-stone-400 max-w-2xl mx-auto text-lg">
+            Si ordenas hoy, te llevas estos complementos diseñados para acelerar tu aprendizaje y darte ese sonido profesional que buscas.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {bonuses.map((bonus, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="relative group bg-stone-800/50 border border-stone-700 p-8 rounded-3xl hover:bg-stone-800 transition-all duration-300"
+            >
+              <div className="absolute top-0 right-8 transform -translate-y-1/2 bg-emerald-500 text-stone-950 text-xs font-black px-4 py-1 rounded-full shadow-xl">
+                {bonus.tag}
+              </div>
+              
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-lg transform group-hover:rotate-6 transition-transform duration-300">
+                {bonus.icon}
+              </div>
+              
+              <h3 className="text-xl font-bold mb-4 leading-tight">{bonus.title}</h3>
+              <p className="text-stone-400 mb-6 text-sm leading-relaxed">
+                {bonus.description}
+              </p>
+              
+              <div className="flex items-center justify-between pt-6 border-t border-stone-700">
+                <span className="text-stone-500 text-xs uppercase font-bold tracking-widest">Valor Real</span>
+                <span className="text-emerald-500 font-bold line-through">{bonus.value}</span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-16 bg-white/5 border border-white/10 p-6 rounded-2xl text-center">
+          <p className="text-white font-medium flex items-center justify-center gap-2">
+            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+            Recibe más de <span className="text-emerald-400">$40 en bonos</span> totalmente GRATIS con tu compra
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Pricing = () => {
   return (
     <section id="pricing" className="py-24 bg-stone-50">
@@ -406,7 +491,8 @@ const Pricing = () => {
                   "26 Variaciones en todos los tonos",
                   "Formato A4 listo para imprimir",
                   "Acceso de por vida",
-                  "Actualizaciones gratuitas"
+                  "Actualizaciones gratuitas",
+                  "3 Bonos exclusivos"
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-stone-700">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
@@ -517,6 +603,7 @@ export default function App() {
         <ProblemSolution />
         <FeaturesGrid />
         <ChordList />
+        <Bonuses />
         <Author />
         <Pricing />
         <FAQ />
