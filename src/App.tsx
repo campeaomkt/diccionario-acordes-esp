@@ -331,6 +331,16 @@ const Testimonials = () => {
         </div>
       </div>
 
+      <div className="max-w-7xl mx-auto px-4 text-center mb-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-stone-100 rounded-full text-stone-500 text-xs font-semibold tracking-wider uppercase select-none">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>Arrastra para ver más</span>
+        </div>
+      </div>
+
       <div 
         className="relative max-w-full mx-auto group/carousel"
         onMouseEnter={() => setIsHovered(true)}
