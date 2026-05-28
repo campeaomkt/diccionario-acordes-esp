@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Music, 
@@ -19,9 +19,7 @@ import {
   Calendar,
   ArrowRight,
   Menu,
-  X,
-  ChevronLeft,
-  ChevronRight
+  X
 } from 'lucide-react';
 
 // --- Types & Constants ---
@@ -203,196 +201,6 @@ const Hero = () => {
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-200 rounded-full blur-3xl opacity-30 -z-0"></div>
             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-400 rounded-full blur-3xl opacity-20 -z-0"></div>
           </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Testimonials = () => {
-  const images = [
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/05/depo-1-dic-acordes-esp.jpg",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/05/depo-2-dic-acordes-esp.jpg",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/05/depo-3-dic-acordes-esp.jpg",
-    "https://eliabcamposteclas.com/wp-content/uploads/2026/05/depo-4-dic-acordes-esp.jpg"
-  ];
-
-  // Repeat the images several times to create an infinite track
-  const listImages = [...images, ...images, ...images, ...images, ...images];
-  
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const scrollPosRef = useRef(0);
-  const [isDown, setIsDown] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    // Position scroll pool in the middle for balanced left/right scrolling
-    const startScroll = el.scrollWidth / 3.5;
-    el.scrollLeft = startScroll;
-    scrollPosRef.current = startScroll;
-  }, []);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    let id: number;
-    const tick = () => {
-      if (!isDown && !isHovered && el) {
-        // 0.35 is ultra-slow and exceptionally smooth
-        scrollPosRef.current += 0.35; 
-        el.scrollLeft = scrollPosRef.current;
-      }
-      id = requestAnimationFrame(tick);
-    };
-    id = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(id);
-  }, [isDown, isHovered]);
-
-  const handleScroll = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    // Boundary resetting to create an illusion of infinite looping
-    if (el.scrollLeft >= el.scrollWidth - el.clientWidth * 1.5) {
-      el.scrollLeft = el.scrollWidth / 3.5;
-      scrollPosRef.current = el.scrollLeft;
-    } else if (el.scrollLeft <= el.clientWidth * 0.2) {
-      el.scrollLeft = el.scrollWidth / 2.5;
-      scrollPosRef.current = el.scrollLeft;
-    } else {
-      // Sync our float reference with actual scrollLeft if user manually scrolled or dragged (difference > 1)
-      if (Math.abs(scrollPosRef.current - el.scrollLeft) > 1.1) {
-        scrollPosRef.current = el.scrollLeft;
-      }
-    }
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setIsDown(true);
-    setStartX(e.pageX - el.offsetLeft);
-    setScrollLeft(el.scrollLeft);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDown(false);
-  };
-
-  const handleMouseUp = () => {
-    setIsDown(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const el = scrollRef.current;
-    if (!isDown || !el) return;
-    e.preventDefault();
-    const x = e.pageX - el.offsetLeft;
-    const walk = (x - startX) * 1.5; // custom drag sensitivity
-    el.scrollLeft = scrollLeft - walk;
-  };
-
-  const handlePrev = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollTo({
-      left: el.scrollLeft - 320,
-      behavior: "smooth"
-    });
-  };
-
-  const handleNext = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollTo({
-      left: el.scrollLeft + 320,
-      behavior: "smooth"
-    });
-  };
-
-  return (
-    <section className="py-20 bg-stone-50 overflow-hidden relative border-y border-stone-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full uppercase tracking-wider mb-4">
-            Testimonios Reales
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
-            Músicos reales, resultados garantizados
-          </h2>
-          <p className="text-stone-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Explora las experiencias de nuestros estudiantes. Desliza con el dedo, haz clic y arrastra con el ratón o usa las flechas para explorar todos los comentarios.
-          </p>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 text-center mb-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-stone-100 rounded-full text-stone-500 text-xs font-semibold tracking-wider uppercase select-none">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <span>Arrastra para ver más</span>
-        </div>
-      </div>
-
-      <div 
-        className="relative max-w-full mx-auto group/carousel"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => {
-          setIsHovered(false);
-          setIsDown(false);
-        }}
-      >
-        <div
-          ref={scrollRef}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseLeave}
-          onMouseMove={handleMouseMove}
-          onScroll={handleScroll}
-          className={`flex gap-6 overflow-x-auto select-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ${
-            isDown ? "cursor-grabbing" : "cursor-grab"
-          } px-8 md:px-16 py-4`}
-        >
-          {listImages.map((src, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0 w-[240px] md:w-[280px] aspect-[9/16] bg-white rounded-2xl shadow-lg shadow-stone-200/60 border border-stone-100 overflow-hidden select-none pointer-events-none transform transition-transform duration-300 hover:scale-[1.03]"
-            >
-              <img
-                src={src}
-                alt={`Testimonio de alumno ${index + 1}`}
-                className="w-full h-full object-cover pointer-events-none"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* Floating manual control arrows */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-8 z-10 opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300">
-          <button
-            onClick={handlePrev}
-            className="w-12 h-12 rounded-full bg-white/90 backdrop-blur border border-stone-200 flex items-center justify-center text-stone-700 shadow-xl hover:bg-emerald-600 hover:text-white hover:border-emerald-600 active:scale-95 transition-all duration-200 cursor-pointer"
-            aria-label="Testimonio Anterior"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-        </div>
-        <div className="absolute top-1/2 -translate-y-1/2 right-4 md:right-8 z-10 opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300">
-          <button
-            onClick={handleNext}
-            className="w-12 h-12 rounded-full bg-white/90 backdrop-blur border border-stone-200 flex items-center justify-center text-stone-700 shadow-xl hover:bg-emerald-600 hover:text-white hover:border-emerald-600 active:scale-95 transition-all duration-200 cursor-pointer"
-            aria-label="Siguiente Testimonio"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
         </div>
       </div>
     </section>
@@ -672,8 +480,8 @@ const Pricing = () => {
               </div>
 
               <div className="flex items-baseline gap-3 mb-8">
-                <span className="text-4xl md:text-5xl font-black text-stone-900">$3.90</span>
-                <span className="text-xl text-stone-400 line-through">$27.00</span>
+                <span className="text-4xl md:text-5xl font-black text-stone-900">U$3.90</span>
+                <span className="text-xl text-stone-400 line-through">U$27.00</span>
                 <span className="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg text-xs font-bold">85% OFF</span>
               </div>
 
@@ -792,7 +600,6 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <Testimonials />
         <ProblemSolution />
         <FeaturesGrid />
         <ChordList />
